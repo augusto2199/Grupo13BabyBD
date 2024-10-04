@@ -32,6 +32,20 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
+-- Table `babyfutbol`.`entrenadores`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `babyfutbol`.`entrenadores` ;
+
+CREATE TABLE IF NOT EXISTS `babyfutbol`.`entrenadores` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `experiencia` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 4
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
 -- Table `babyfutbol`.`equipos`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `babyfutbol`.`equipos` ;
@@ -40,25 +54,13 @@ CREATE TABLE IF NOT EXISTS `babyfutbol`.`equipos` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(100) NULL DEFAULT NULL,
   `categoria` VARCHAR(100) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 4
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `babyfutbol`.`entrenadores`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `babyfutbol`.`entrenadores` ;
-
-CREATE TABLE IF NOT EXISTS `babyfutbol`.`entrenadores` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `experiencia` INT(11) NULL DEFAULT NULL,
-  `equipo_id` INT(11) NULL DEFAULT NULL,
+  `entrenador_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `entrenador_ibfk_1`
-    FOREIGN KEY (`equipo_id`)
-    REFERENCES `babyfutbol`.`equipos` (`id`))
+  CONSTRAINT `fk_equipos_entrenadores1`
+    FOREIGN KEY (`entrenador_id`)
+    REFERENCES `babyfutbol`.`entrenadores` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
@@ -73,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `babyfutbol`.`torneos` (
   `nombre` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
+AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -131,6 +133,7 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
 
+
 -- -----------------------------------------------------
 -- Table `babyfutbol`.`partidos`
 -- -----------------------------------------------------
@@ -165,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `babyfutbol`.`partidos` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+
 -- -----------------------------------------------------
 -- Table `babyfutbol`.`roles`
 -- -----------------------------------------------------
@@ -175,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `babyfutbol`.`roles` (
   `nombre` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -217,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `babyfutbol`.`usuarios` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 8
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8mb4;
 
 SET SQL_MODE=@OLD_SQL_MODE;
